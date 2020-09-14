@@ -11,6 +11,10 @@ sell_price = {}
 sell_price_count = 0
 buy_price = {}
 buy_price_count = 0
+Y= np.zeros(30000)
+for i in range(0,30000):
+    if i < 15000:
+        Y[i] = 1
 with open('AUD_JPY_price.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     line_count = 0
@@ -38,10 +42,11 @@ for i in zone:
    
 #run
 for i in range(0,sell_price_count):
-    for j in np.arange(float_ceil(float(buy_price[i]),1), 90.0, 0.1):
-        if(zone_status_buy[str(round(j,1))] == 0) :
-            cf[str(round(j,1))] += 1
-        zone_status_buy[str(round(j,1))] = 1
+    if Y[i] == 1:
+        for j in np.arange(float_ceil(float(buy_price[i]),1), 90.0, 0.1):
+            if(zone_status_buy[str(round(j,1))] == 0) :
+                cf[str(round(j,1))] += 1
+            zone_status_buy[str(round(j,1))] = 1
     if float(sell_price[i]) >= 60.0 and float(sell_price[i]) <= 90.1:
         zone_status_sell[str(float_floor(float(sell_price[i]),1))] = 0
         zone_status_buy[str(float_floor(float(sell_price[i])-0.1,1))] = 0
