@@ -12,7 +12,7 @@ sell_price = {}
 sell_price_count = 0
 buy_price = {}
 buy_price_count = 0
-)
+
 with open('AUD_JPY_price.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     line_count = 0

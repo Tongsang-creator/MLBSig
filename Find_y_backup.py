@@ -5,7 +5,7 @@ import random
 # save numpy array as csv file
 from numpy import asarray
 from numpy import savetxt
-
+from numpy import loadtxt
 def float_ceil(n, decimals=0):
     multiplier = 10 ** decimals
     return math.ceil(n * multiplier) / multiplier
@@ -37,7 +37,7 @@ zone_status_buy = {}
 zone_status_sell = {}
 best_Y = np.zeros(30000)
 best_cf = 0
-n = 100000
+n = 1
 datamax = 1000
 datacount = 1
 
@@ -52,8 +52,8 @@ for iterator in range(0,n):
         #zone_status_buy[str(round(i,1))] = 1
         zone_status_sell[str(round(i+0.1,1))] = 0
 
-    for i in range(0,30000):
-        Y[i] = random.randint(0,1)   
+    #for i in range(0,30000):
+    Y = data = loadtxt('data.csv', delimiter=',')
         #Y[i] = 1 #58.304999999986464
 #run
     for i in range(0,sell_price_count):
