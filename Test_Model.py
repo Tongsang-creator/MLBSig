@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 import math
+import random
 def float_ceil(n, decimals=0):
     multiplier = 10 ** decimals
     return math.ceil(n * multiplier) / multiplier
@@ -11,10 +12,7 @@ sell_price = {}
 sell_price_count = 0
 buy_price = {}
 buy_price_count = 0
-Y= np.zeros(30000)
-for i in range(0,30000):
-    if i < 15000:
-        Y[i] = 1
+)
 with open('AUD_JPY_price.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     line_count = 0
@@ -34,12 +32,15 @@ zone = np.arange(60.0, 90.1, 0.1)
 zone_status_buy = {}
 zone_status_sell = {}
 cf = {}
+best_Y = {}
+
 #innitial
 for i in zone:
     zone_status_buy[str(round(i,1))] = 1
     zone_status_sell[str(round(i+0.1,1))] = 1
     cf[str(round(i,1))] = 0
-   
+for i in range(0,30000):
+    Y[i] = random.randint(0,1)   
 #run
 for i in range(0,sell_price_count):
     if Y[i] == 1:
