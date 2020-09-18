@@ -17,12 +17,11 @@ with open('AUD_JPY_price.csv', mode='r') as csv_file:
             print(f'Column names are {", ".join(row)}')
             line_count += 1
         if line_count < 9001:
-            test_x[test_x_count] = [row["buy price"],row["sell price"],row["volume"],row["close"],row["open"]]
+            test_x[test_x_count] = [(float(row["open"])-68.86259253)/3.620579894**2,(float(row["high"])-68.8889767)/3.608828267**2,(float(row["low"])-68.83644273)/3.632035774**2,(float(row["close"])-68.86246913)/3.620495958**2,(float(row["volume"])-423.1541667)/380.0432996]
             test_x_count += 1
         else:
-            train_x[train_x_count] = [row["buy price"],row["sell price"],row["volume"],row["close"],row["open"]]
+            train_x[train_x_count] = [(float(row["open"])-68.8889767)/3.620579894**2,(float(row["high"])-68.8889767)/3.608828267**2,(float(row["low"])-68.83644273)/3.632035774**2,(float(row["close"])-68.86246913)/3.620495958**2,(float(row["volume"])-423.1541667)/380.0432996]
             train_x_count += 1
-        
         line_count += 1
 df = pd.DataFrame(test_x)
 df2 = pd.DataFrame(train_x)
@@ -34,7 +33,7 @@ test_y_count = 0
 train_y = {}
 train_y_count = 0
 
-with open('data.csv', mode='r') as csv_file:
+with open('data2.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     line_count = 0
     for row in csv_reader:

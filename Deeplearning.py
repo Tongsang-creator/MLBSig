@@ -10,6 +10,10 @@ def load_data():
     x_train = np.array(pd.read_csv (r'train_x.csv', header=None))
     y_test = np.array(pd.read_csv (r'test_y.csv', header=None))
     y_train = np.array(pd.read_csv (r'train_y.csv', header=None))
+    #x_test = np.swapaxes(x_test,0,1)
+    #x_train = np.swapaxes(x_train,0,1)
+    #y_test = np.swapaxes(y_test,0,1)
+    #y_train = np.swapaxes(y_train,0,1)
     return x_test,x_train,y_test,y_train
 
 def sigmoid(Z):
@@ -358,7 +362,7 @@ def update_parameters(parameters, grads, learning_rate):
     ### END CODE HERE ###
     return parameters
 
-def L_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 3000, print_cost=False):#lr was 0.009
+def L_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 6000, print_cost=False):#lr was 0.009
     """
     Implements a L-layer neural network: [LINEAR->RELU]*(L-1)->LINEAR->SIGMOID.
     
@@ -443,9 +447,11 @@ def predict(X, y, parameters):
     for i in range(0, probas.shape[1]):
         if probas[0,i] > 0.5:
             p[0,i] = 1
-            print(f"yes {probas[0,i]}")
+            #print(f"yes {probas[0,i]}")
         else:
             p[0,i] = 0
+            #print (probas[0,i])
+            
     
     #print results
     print ("predictions: " + str(p))
@@ -459,10 +465,10 @@ def predict(X, y, parameters):
 #pred_test = predict(test_x, test_y, parameters)
 x_test, x_train,y_test,y_train = load_data()  
 
-layers_dims = [5,3, 1] 
-parameters = L_layer_model(x_train, y_train, layers_dims, num_iterations = 6000, print_cost = True)
+layers_dims = [5,3,2, 1] 
+parameters = L_layer_model(x_train, y_train, layers_dims, num_iterations = 10000, print_cost = True)
 pred_train = predict(x_train, y_train, parameters)
 pred_test = predict(x_test, y_test, parameters)
 
-df = pd.DataFrame([parameters])
-df.to_csv (r'result.csv', index = False, header=True)
+#df = pd.DataFrame([parameters])
+#df.to_csv (r'result.csv', index = False, header=True)
